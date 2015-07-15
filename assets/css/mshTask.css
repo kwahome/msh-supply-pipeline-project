@@ -1,0 +1,32 @@
+.color
+{
+
+}
+.unclickedColor
+{
+  color: #23527C;
+  cursor: pointer;
+}
+
+.unclickedColor:hover
+{
+  color: orange;
+  cursor: pointer;
+}
+
+.clickedColor
+{
+  color: orange;
+  cursor: pointer;
+}
+
+.facilitiestext
+{
+	color:#23527C;
+}
+
+.facilitiestext:hover
+{
+	color:orange;
+	cursor: pointer;
+}
