@@ -92,7 +92,7 @@
                         </p>
                     </a>
 
-                    <span class = "pull-right" style = "margin-right:100px;margin-top:20px">
+                    <span class = "pull-right" style = "margin-right:120px;margin-top:20px">
                         <span style ="color:white;margin-right:10px">
                             <?php echo $_SESSION["name"];?>
                         </span>
