@@ -6,12 +6,13 @@
             <label style="color:black">Facility Name:</label><span id="facility_detail"></span>&nbsp;&nbsp;
             <label style="color:black">Master Facility Code:</label><span id="facility_id"></span>&nbsp;&nbsp;
             <label style="color:black">Period of Reporting:</label><span id="reportingperiod"></span>
-            
+
             <?php
+                session_start();
                 if(($_SESSION["user_role"]=="WRITE")||($_SESSION["user_role"]=="ADMIN"))
                 {
-                    echo "<div class='col-md-offset-8'>
-                            <button class='btn btn-success post-data'>Post Data</button>
+                    echo "<div class='col-md-offset-9'>
+                            <button class='btn btn-success post-data'>Post Aggregated Values to DHIS</button>
                          </div>";
                 }
             ?>
