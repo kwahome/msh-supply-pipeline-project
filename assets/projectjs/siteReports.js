@@ -1,3 +1,5 @@
+var dateGenerated = new Date();
+
 // function siteAnalytics()
 function siteAnalytics()
 {
@@ -206,21 +208,39 @@ function reportDetails()
 // function listSites
 function listSites(type,program,orgUnit, orgUnitLevel)
 {
-    var dateGenerated = new Date();
 
     if(type == "Ordering Points")
     {
-        $('div#returned_messages').html("<span style = 'color:green;margin-left:30px'> List of Ordering Points</span>");
+        var heading =  "<span style = 'color:green;margin-left:30px'> List of Ordering Points"+
+                            "<div class='col-md-offset-10' style = 'margin-top:-20px'>"+
+                                "<span>"+
+                                    "<a  class='btn btn-default' download='list_of_ordering_points_"+orgUnitLevel+".xls' href='#'"+
+                                        "onclick='return ExcellentExport.excel(this, \"orderingpoints\", \"reportTitle\");'>"+
+                                        "<i class='fa fa-file-excel-o'></i>Export"+
+                                    "</a>"+
+                                "</span>"+
+                            "</div>"+
+                        "</span>";
+
+        $('div#returned_messages').html(heading);
 
         var data =  "<div class='panel panel-default' style = 'margin-left:-30px;margin-top:0px'>"+
-                        "<div class='panel-heading'>"+
-                            "<h3 class='panel-title'>"+
-                                "<span>Program: ART</span><br>"+
-                                "<span>Pipeline: KEMSA</span><br>"+
-                                "<span>Date Generated: <span style = 'color:green'>"+dateGenerated+"</span></span><br>"+
-                            "</h3>"+                                
+                        "<div class='panel-heading' style = 'color:black'>"+
+                            "<span class='panel-title' id='reportTitle' style = 'font-family:font awesome'>"+
+                                "<span>Program: "+
+                                    "<span id = 'program_name' style = 'color:green;font-size:11pt'></span>"+
+                                "</span><br>"+
+                                "<span>Pipeline: "+
+                                    "<span style = 'font-size:11pt;color:green'>KEMSA</span>"+
+                                "</span><br>"+
+                                "<span>Level: "+
+                                    "<span id = 'report_level' style = 'font-size:11pt;color:green'></span>"+
+                                "</span><br>"+
+                                "<span>Date Generated: <span style = 'color:green;font-size:11pt'>"+dateGenerated+"</span></span><br>"+
+                            "</span>"+                             
                         "</div>"+
-                        "<table id= 'orderingpoints' style = 'border-radius:5px;width:95%;margin-top:5px'>"+
+
+                        "<table id= 'orderingpoints' class = 'table table-responsive table-striped' style = 'border-radius:5px;width:95%;margin-top:20px'>"+
                             "<thead>"+
                                 "<th style = 'font-weight:bold'>#</th>"+
                                 "<th style = 'font-weight:bold'>MFL Code</th>"+
@@ -284,17 +304,42 @@ function listSites(type,program,orgUnit, orgUnitLevel)
                 // {
                 //     $("#orderingpoints").dataTable();
                 // });
-
             }
         );
     }
 
     else if(type == "Service Points")
     {
-        $('div#returned_messages').html("<span style = 'color:green;margin-left:30px'> List of Service Points</span>");
+        var heading =  "<span style = 'color:green;margin-left:30px'> List of Service Points"+
+                            "<div class='col-md-offset-10' style = 'margin-top:-20px'>"+
+                                "<span>"+
+                                    "<a  class='btn btn-default' download='list_of_service_points_"+orgUnitLevel+".xls' href='#'"+
+                                        "onclick='return ExcellentExport.excel(this, \"servicepoints\", \"reportTitle\");'>"+
+                                        "<i class='fa fa-file-excel-o'></i>Export"+
+                                    "</a>"+
+                                "</span>"+
+                            "</div>"+
+                        "</span>";
 
-        var data =  "<div class='panel panel-default' style = 'margin-left:-30px;margin-top:0px'>"+
-                        "<table id= 'servicepoints' style = 'border-radius:5px;width:95%'>"+
+        $('div#returned_messages').html(heading);
+
+        var data =  "<div class='panel panel-default' style = 'margin-left:-30px;margin-top:0px' id = 'servicepointsreport'>"+
+                        "<div class='panel-heading' style = 'color:black'>"+
+                            "<span class='panel-title' id='reportTitle' style = 'font-family:font awesome'>"+
+                                "<span>Program: "+
+                                    "<span id = 'program_name' style = 'color:green;font-size:11pt'></span>"+
+                                "</span><br>"+
+                                "<span>Pipeline: "+
+                                    "<span style = 'font-size:11pt;color:green'>KEMSA</span>"+
+                                "</span><br>"+
+                                "<span>Level: "+
+                                    "<span id = 'report_level' style = 'font-size:11pt;color:green'></span>"+
+                                "</span><br>"+
+                                "<span>Date Generated: <span style = 'color:green;font-size:11pt'>"+dateGenerated+"</span></span><br>"+
+                            "</span>"+                             
+                        "</div>"+
+
+                        "<table id= 'servicepoints' class = 'table table-responsive table-striped' style = 'border-radius:5px;width:95%'>"+
                             "<thead>"+
                                 "<th style = 'font-weight:bold'>#</th>"+
                                 "<th style = 'font-weight:bold'>MFL Code</th>"+
@@ -356,17 +401,17 @@ function listSites(type,program,orgUnit, orgUnitLevel)
 
                             if(receivedDetails[0] == "Dispensing Point")
                             {
-                                $("#dispensing_point_"+receivedDetails[3]).html("<span class = 'fa fa-times' style = 'margin-left:40px'></span>");
+                                $("#dispensing_point_"+receivedDetails[3]).html("<span style = 'text-align:center'>x</span>");
                             }
 
                             else if(receivedDetails[0] == "Satellite Site")
                             {
-                                $("#satellite_site_"+receivedDetails[3]).html("<span class = 'fa fa-times' style = 'margin-left:40px'></span>");
+                                $("#satellite_site_"+receivedDetails[3]).html("<span style = 'text-align:center'>x</span>");
                             }
 
                             else if(receivedDetails[0] == "StandAlone")
                             {
-                                $("#standalone_site_"+receivedDetails[3]).html("<span class = 'fa fa-times' style = 'margin-left:40px'></span>");
+                                $("#standalone_site_"+receivedDetails[3]).html("<span style = 'text-align:center'>x</span>");
                             }
                         }
 
@@ -383,6 +428,28 @@ function listSites(type,program,orgUnit, orgUnitLevel)
         );
     }
 
+    var dataUrl = "db/fetch/get_program_name.php";
+    $.getJSON
+    (
+        dataUrl,
+        {program_id:program},
+        function(results)
+        {
+            $("#program_name").html(results[0].program_name);
+        }
+    );
+
+    var orgUnitUrl = "db/fetch/get_orgunit_level_by_name.php";
+    $.get
+    (
+        orgUnitUrl,
+        {org_unit:orgUnit,org_unit_level:orgUnitLevel},
+        function(results)
+        {
+            $("#report_level").html(results);
+        }
+    );
+
 }
 
 /* -------------------------------------------------------------------------------------------------------------------------- */
@@ -392,20 +459,44 @@ function sitesDistribution(type,program,orgUnit, orgUnitLevel)
 {
     if(type == "Ordering Points")
     {
-        $('div#returned_messages').html("<span style = 'color:green;margin-left:30px'> Ordering Points Distribution by County</span>");
+        var heading =  "<span style = 'color:green;margin-left:30px'> Ordering Points Distribution by County"+
+                            "<div class='col-md-offset-9' style = 'margin-top:-20px'>"+
+                                "<span>"+
+                                    "<a  class='btn btn-default btn' download='ordering_points_by_county.xls' href='#'"+
+                                        "onclick='return ExcellentExport.excel(this, \"orderingpointsdistribution\", \"reportTitle\");'>"+
+                                        "<i class='fa fa-file-excel-o'></i>Export"+
+                                    "</a>"+
+                                "</span>"+
+
+                                "<span style = 'margin-left:10px' class = 'btn btn-info btn'>"+
+                                    "<i class='fa fa-bar-chart' style = 'font-size:10pt'"+
+                                        "onclick='javascript:sitesDistributionVisualizer(\"Ordering Points\",\""+program+"\",\""+orgUnit+"\",\""+orgUnitLevel+"\");'>"+
+                                        " Bar Chart"+
+                                    "</i>"+
+                                "</span>"+
+
+                            "</div>"+
+                        "</span>";
+
+        $('div#returned_messages').html(heading);
 
         var data =  "<div class='panel panel-default' style = 'margin-left:-30px;margin-top:0px'>"+
-                        "<div class='panel-heading'>"+
-                            "<h3 class='panel-title'>"+
-                                "Ordering Points Distribution By County"+
-                                "<select class='form-control' style = 'margin-left:800px;margin-top:-30px;width:10%;' id = 'view_as_select'"+
-                                "onchange = 'javascript:sitesDistributionVisualizer(\"Ordering Points\",\""+program+"\",\""+orgUnit+"\",\""+orgUnitLevel+"\");'>"+
-                                    "<option value = 'View As'>View As</option>"+
-                                    "<option value = 'Bar Chart'>Bar Chart</option>"+
-                                "</select>"+
-                            "</h3>"+                                
+                        "<div class='panel-heading' style = 'color:black'>"+
+                            "<span class='panel-title' id='reportTitle' style = 'font-family:font awesome'>"+
+                                "<span>Program: "+
+                                    "<span id = 'program_name' style = 'color:green;font-size:11pt'></span>"+
+                                "</span><br>"+
+                                "<span>Pipeline: "+
+                                    "<span style = 'font-size:11pt;color:green'>KEMSA</span>"+
+                                "</span><br>"+
+                                "<span>Level: "+
+                                    "<span id = 'report_level' style = 'font-size:11pt;color:green'>By County</span>"+
+                                "</span><br>"+
+                                "<span>Date Generated: <span style = 'color:green;font-size:11pt'>"+dateGenerated+"</span></span><br>"+
+                            "</span>"+                             
                         "</div>"+
-                        "<table id= 'orderingpointsdistribution' style = 'border-radius:5px;width:95%'>"+
+
+                        "<table id= 'orderingpointsdistribution' class = 'table table-responsive table-striped' style = 'border-radius:5px;width:95%'>"+
                             "<thead>"+
                                 "<th style = 'font-weight:bold'>#</th>"+
                                 "<th style = 'font-weight:bold'>County</th>"+
@@ -414,7 +505,7 @@ function sitesDistribution(type,program,orgUnit, orgUnitLevel)
                                 "<th style = 'font-weight:bold'>Standalone sites</th>"+
                                 "<th style = 'font-weight:bold'>Total of Ordering Points</th>"+                           
                             "</thead>"+
-                            "<tbody id = 'tbody'>"+
+                            "<tbody id = 'tbody' style = 'text-align:center'>"+
                             "</tbody>"+
                         "</table>"+
                     "</div>";
@@ -478,10 +569,44 @@ function sitesDistribution(type,program,orgUnit, orgUnitLevel)
 
     else if(type == "Service Points")
     {
-        $('div#returned_messages').html("<span style = 'color:green;margin-left:30px'> Service Points Distribution by County</span>");
+        var heading =  "<span style = 'color:green;margin-left:30px'> Service Points Distribution by County"+
+                            "<div class='col-md-offset-9' style = 'margin-top:-20px'>"+
+                                "<span>"+
+                                    "<a  class='btn btn-default btn' download='service_points_by_county.xls' href='#'"+
+                                        "onclick='return ExcellentExport.excel(this, \"servicepointsdistribution\", \"reportTitle\");'>"+
+                                        "<i class='fa fa-file-excel-o'></i>Export"+
+                                    "</a>"+
+                                "</span>"+
+
+                                "<span style = 'margin-left:10px' class = 'btn btn-info btn'>"+
+                                    "<i class='fa fa-bar-chart' style = 'font-size:10pt'"+
+                                        "onclick='javascript:sitesDistributionVisualizer(\"Service Points\",\""+program+"\",\""+orgUnit+"\",\""+orgUnitLevel+"\");'>"+
+                                        " Bar Chart"+
+                                    "</i>"+
+                                "</span>"+
+
+                            "</div>"+
+                        "</span>";
+
+        $('div#returned_messages').html(heading);
 
         var data =  "<div class='panel panel-default' style = 'margin-left:-30px;margin-top:0px'>"+
-                        "<table id= 'servicepointsdistribution' style = 'border-radius:5px;width:95%'>"+
+                        "<div class='panel-heading' style = 'color:black'>"+
+                            "<span class='panel-title' id='reportTitle' style = 'font-family:font awesome'>"+
+                                "<span>Program: "+
+                                    "<span id = 'program_name' style = 'color:green;font-size:11pt'></span>"+
+                                "</span><br>"+
+                                "<span>Pipeline: "+
+                                    "<span style = 'font-size:11pt;color:green'>KEMSA</span>"+
+                                "</span><br>"+
+                                "<span>Level: "+
+                                    "<span id = 'report_level' style = 'font-size:11pt;color:green'>By County</span>"+
+                                "</span><br>"+
+                                "<span>Date Generated: <span style = 'color:green;font-size:11pt'>"+dateGenerated+"</span></span><br>"+
+                            "</span>"+                             
+                        "</div>"+
+
+                        "<table id= 'servicepointsdistribution' class = 'table table-responsive table-striped' style = 'border-radius:5px;width:95%'>"+
                             "<thead>"+
                                 "<th style = 'font-weight:bold'>#</th>"+
                                 "<th style = 'font-weight:bold'>County</th>"+
@@ -554,6 +679,16 @@ function sitesDistribution(type,program,orgUnit, orgUnitLevel)
         );
     }
 
+    var dataUrl = "db/fetch/get_program_name.php";
+    $.getJSON
+    (
+        dataUrl,
+        {program_id:program},
+        function(results)
+        {
+            $("#program_name").html(results[0].program_name);
+        }
+    );
 }
 
 /* -------------------------------------------------------------------------------------------------------------------------- */
@@ -561,20 +696,47 @@ function sitesDistribution(type,program,orgUnit, orgUnitLevel)
 // Function sitesVisualizer()
 function sitesDistributionVisualizer(type,program,orgUnit, orgUnitLevel)
 {
-    var viewSelectList = document.getElementById("view_as_select");
-    var viewSelectIndex = viewSelectList.selectedIndex; 
-    var viewSelectOptions = viewSelectList.options;
-    var selectedview = viewSelectOptions[viewSelectIndex].value;
-
-    if((selectedview == "Bar Chart")&&(type == "Ordering Points"))
+    if(type == "Ordering Points")
     {
+        var heading =  "<span style = 'color:green;margin-left:30px'> Ordering Points Distribution By County Bar Chart"+
+                            "<div class='col-md-offset-9' style = 'margin-top:-20px'>"+
+                                "<span>"+
+                                    "<a  class='btn btn-default btn' download='ordering_points_by_county_bar_chart.xls' href='#'"+
+                                        "onclick='return ExcellentExport.excel(this, \"orderingpoints-bar-chart\", \"reportTitle\");'>"+
+                                        "<i class='fa fa-file-excel-o'></i>Export"+
+                                    "</a>"+
+                                "</span>"+
+
+                                "<span style = 'margin-left:10px' class = 'btn btn-info btn'>"+
+                                    "<i class='fa fa-list' style = 'font-size:10pt'"+
+                                        "onclick='javascript:sitesDistribution(\""+type+"\",\""+program+"\",\""+orgUnit+"\",\""+orgUnitLevel+"\");'>"+
+                                        " List"+
+                                    "</i>"+
+                                "</span>"+
+
+                            "</div>"+
+                        "</span>";
+
+        $('div#returned_messages').html(heading);
+
         var chartToAppend = "<!-- START BAR CHART -->"+
                             "<div class='panel panel-default' style = 'width:95%'>"+
-                                "<div class='panel-heading'>"+
-                                    "<h3 class='panel-title'>Bar Chart</h3>"+                              
+                                "<div class='panel-heading' style = 'color:black'>"+
+                                    "<span class='panel-title' id='reportTitle' style = 'font-family:font awesome'>"+
+                                        "<span>Program: "+
+                                            "<span id = 'program_name' style = 'color:green;font-size:11pt'></span>"+
+                                        "</span><br>"+
+                                        "<span>Pipeline: "+
+                                            "<span style = 'font-size:11pt;color:green'>KEMSA</span>"+
+                                        "</span><br>"+
+                                        "<span>Level: "+
+                                            "<span id = 'report_level' style = 'font-size:11pt;color:green'>By County</span>"+
+                                        "</span><br>"+
+                                        "<span>Date Generated: <span style = 'color:green;font-size:11pt'>"+dateGenerated+"</span></span><br>"+
+                                    "</span>"+                             
                                 "</div>"+
                                 "<div class='panel-body'>"+
-                                    "<div id='orderingpoints-bar-chart' style='height: 300px;'></div>"+
+                                    "<div id='orderingpoints-bar-chart' style='height: 300px;width:auto;overflow:scroll'></div>"+
                                 "</div>"+
                             "</div>"+
                             "<!-- END BAR CHART -->";
@@ -582,123 +744,121 @@ function sitesDistributionVisualizer(type,program,orgUnit, orgUnitLevel)
         $('div#facilities').html(chartToAppend);
 
         // Place a post request
-        /*NOTES:
-            At positions
-                0 - Dispensing Points
-                1 - Satellite Sites
-                2 - StandAlone Sites
-                3 - Total Ordering Points
-                4 - County ID
-        */
-
-        var countiesUrl = "db/fetch/get_counties.php";
-        $.getJSON
-        (
-            countiesUrl,
-            function(counties)
+        var dataUrl = "db/fetch/ordering_points_visualizer.php";
+        $.ajax
+        ({
+            type: 'GET',
+            url: dataUrl,
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function(values) 
             {
-                var countyData = [];
+                Morris.Bar
+                (
+                    {
+                        element: 'orderingpoints-bar-chart',
+                        data: values,
+                        xkey: ['y'],
+                        ykeys: ['a'],
+                        labels: ['County'],
+                        barColors: ['#33414E']
+                    }
+                );
+            },
+            error:function(error)
+            {
 
-                $.each(counties, function(index, county){
-
-                    var dataUrl = "db/fetch/ordering_points_distribution.php";
-                    $.getJSON
-                    (
-                        dataUrl,
-                        {program_id:program,org_unit:county.county_id,org_unit_level:orgUnitLevel},
-                        function(results)
-                        {
-                            countyData.push({y:county.county_name,a:results[3]});
-                            //console.log(countyData);
-                        }
-                    );
-                });
-
-                console.log(countyData);
-                
-                Morris.Bar({
-                    element: 'orderingpoints-bar-chart',
-                    data: countyData,
-                    xkey: 'y',
-                    ykeys: ['a'],
-                    labels: ['Series A'],
-                    barColors: ['#B64645']
-                });
             }
-        );
-    
+        });    
     }
 
-    else if((selectedview == "Bar Chart")&&(type == "Service Points"))
+    else if(type == "Service Points")
     {
+        var heading =  "<span style = 'color:green;margin-left:30px'> Service Points Distribution By County Bar Chart"+
+                            "<div class='col-md-offset-9' style = 'margin-top:-20px'>"+
+                                "<span>"+
+                                    "<a  class='btn btn-default btn' download='service_points_by_county_bar_chart.xls' href='#'"+
+                                        "onclick='return ExcellentExport.excel(this, \"servicepoints-bar-chart\", \"reportTitle\");'>"+
+                                        "<i class='fa fa-file-excel-o'></i>Export"+
+                                    "</a>"+
+                                "</span>"+
+
+                                "<span style = 'margin-left:10px' class = 'btn btn-info btn'>"+
+                                    "<i class='fa fa-list' style = 'font-size:10pt'"+
+                                        "onclick='javascript:sitesDistribution(\""+type+"\",\""+program+"\",\""+orgUnit+"\",\""+orgUnitLevel+"\");'>"+
+                                        " List"+
+                                    "</i>"+
+                                "</span>"+
+
+                            "</div>"+
+                        "</span>";
+
+        $('div#returned_messages').html(heading);
+
         var chartToAppend = "<!-- START BAR CHART -->"+
                             "<div class='panel panel-default' style = 'width:95%'>"+
-                                "<div class='panel-heading'>"+
-                                    "<h3 class='panel-title'>Bar Chart</h3>"+                               
+                                "<div class='panel-heading' style = 'color:black'>"+
+                                    "<span class='panel-title' id='reportTitle' style = 'font-family:font awesome'>"+
+                                        "<span>Program: "+
+                                            "<span id = 'program_name' style = 'color:green;font-size:11pt'></span>"+
+                                        "</span><br>"+
+                                        "<span>Pipeline: "+
+                                            "<span style = 'font-size:11pt;color:green'>KEMSA</span>"+
+                                        "</span><br>"+
+                                        "<span>Level: "+
+                                            "<span id = 'report_level' style = 'font-size:11pt;color:green'>By County</span>"+
+                                        "</span><br>"+
+                                        "<span>Date Generated: <span style = 'color:green;font-size:11pt'>"+dateGenerated+"</span></span><br>"+
+                                    "</span>"+                             
                                 "</div>"+
+
                                 "<div class='panel-body'>"+
-                                    "<div id='orderingpoints-bar-chart' style='height: 300px;'></div>"+
+                                    "<div id='servicepoints-bar-chart' style='height: 300px;'></div>"+
                                 "</div>"+
                             "</div>"+
                             "<!-- END BAR CHART -->";
 
         $('div#facilities').html(chartToAppend);
 
-        Morris.Bar
-        (
-            {
-                element: 'orderingpoints-bar-chart',
-                data: 
-                [
-                    { y: 'County',a: 0},
-                ],
-                xkey: 'y',
-                ykeys: ['a'],
-                labels: ['County'],
-                barColors: ['#33414E']
-            }
-        );
-
         // Place a post request
-        /*NOTES:
-            At positions
-                0 - Dispensing Points
-                1 - Satellite Sites
-                2 - StandAlone Sites
-                3 - Total Ordering Points
-                4 - County ID
-        */
-        var countyDetails = [];
-        var countyData = [];
-
-        var countiesUrl = "db/fetch/get_counties.php";
-        $.getJSON
-        (
-            countiesUrl,
-            function(counties)
+        var dataUrl = "db/fetch/service_points_visualizer.php";
+        $.ajax
+        ({
+            type: 'GET',
+            url: dataUrl,
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function(values) 
             {
-                for(var counting=0; counting<counties.length;counting++)
-                {
-                    countyDetails.push(counties[counting].county_name);
+                Morris.Bar
+                (
+                    {
+                        element: 'servicepoints-bar-chart',
+                        data: values,
+                        xkey: ['y'],
+                        ykeys: ['a'],
+                        labels: ['County'],
+                        barColors: ['#33414E']
+                    }
+                );
+            },
+            error:function(error)
+            {
 
-                    var dataUrl = "db/fetch/service_points_distribution.php";
-                    $.getJSON
-                    (
-                        dataUrl,
-                        {program_id:program,org_unit:counties[counting].county_id,org_unit_level:orgUnitLevel},
-                        function(results)
-                        {
-                            countyData.push(results[3]);
-                        }
-                    );
-                }
             }
-        );
-
-        console.log(countyDetails);
-        console.log(countyData);
-
+        }); 
     }
+
+    var dataUrl = "db/fetch/get_program_name.php";
+    $.getJSON
+    (
+        dataUrl,
+        {program_id:program},
+        function(results)
+        {
+            $("#program_name").html(results[0].program_name);
+        }
+    );
 }
 
 /* -------------------------------------------------------------------------------------------------------------------------- */

@@ -21,7 +21,7 @@
 
         </div>
         <div class="panel-body" style="overflow: scroll;height:500px">
-            <table class="table table-responsive table-striped" id="artReport">
+            <table class="table table-responsive table-striped dataTable" id="artReport">
                 <thead>
                 <th>#</th>
                 <th>MFL Code</th>
@@ -34,8 +34,10 @@
                 <th>Paed PMTCT</th>
                 </thead>
                 <tbody id="formData">
-
                 </tbody>
+                <tfoot class="text-success" id="grandTotal">
+
+                </tfoot>
 
             </table>
         </div>

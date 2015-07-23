@@ -1,42 +1,47 @@
 <?php
 # Include system config file
-require '../system/config.php';
+    require '../system/config.php';
 
-session_start();
-// Validate a user has logged in
-// If not logged in, redirect to the log in page
-if(!isset($_SESSION['login_id']))
-{
-    header('Location:'.$base_path.'');
-}
-else
-{
-    # API login Credentials
-    $username = $access_user;
-    $password = $access_password;
+    session_start();
+    // Validate a user has logged in
+    // If not logged in, redirect to the log in page
+    if(!isset($_SESSION['login_id']))
+    {
+        header('Location:'.$base_path.'');
+    }
+    else
+    {
+        # API login Credentials
+        $username = $access_user;
+        $password = $access_password;
 
     //HTTP GET request -Using Curl -Response JSON
-    $period = $_GET['period'];
+   $period = "201501";
     $orgUnits = $_GET['orgUnits'];
-    $dataSet=$_GET['dataSet'];
-
+   $dataSet=$_GET['dataSet'];
+    $orgUnit =$_GET['orgUnit'];
     $report=array();
 
-    $adult_art=["vQT7jVREviu","LlpQr7Jx1BW","m1BhDG7YLeS","jGhEQraxUr6","lw6LxmBFWBU","NoxMrLQ9GN6","KLLFIMDrV4f","bk80ClT6mda","TQyUBinUunX","HrAdMNqpfGc","nOKnANAWrN9","VmoB9JVggdg","aLEuudUbOjS","TGp2iwJoKgQ","KdFbp1qspEm","vhAvbR8jvbp","R8JmE1Byw3u","THFrJkfyYTx","IW86R66FbNT","SOoiP7qOsUo","eh52aI0mbHM"];
-    $adult_pmtct=["fmNAMrLC6E1","ObbqKDSYHSM","wzGQUCOS6JH","HDREJbs99Jo","SZ9KQbbRGDK","hhF0lv4ApAg","XlDfIMLMCc0","KWwyekF5VDf","JWbn16GS54v","WP9sHVw3YfA","bzRJvVCKdRy"];
-    $adult_pep=["R8qrfeyxtJG","u7hsTiKdiiu","v7jHwarkqud","pvaUMcgjp1k","rlmTbfq5Idg"];
-    $paediatric_art=["uR26Yy0UKQe","luuOdMkUhUs","CjlzQG0xssl","dcJgt3rWowH","aihV4ADJ03p","iSfgVwytK4H","c1t8oGHQiGl","AMog4o55zNE","OZW7P0YVMTf","tq5Is5rstXr","T1ycYq5lhl9","Z6fMvN6VtSF","ccvlRpDaH9f","F7kHcKkcAkt","IwGG1bBlx3K","GCrlI7zb3oy","RhSiKJe7ZJq","J2X6rkORmGE","kE0fmdbd8Ge","Ac9RFUmUqJf","N2NmanbK65P","a2zcBjmJsFY","eaaug3VjX0J","z60P04EXWwx","FdlaCONjVHI"];
-    $paediatric_pmtct=["RU37FYRhkuI","FfKmFD4Hsfh","ZBwrHoHlZPs","N06L50978pu","zE7RKAsYTpb","i995jo2yPXw"];
-    $paediatric_pep=["SylmDjlZEjQ","wLghnsMARPW","F6tU0MuyNK5"];
+    //Data Elements for categories in the fmaps
+    $adult_art=["kPUVrR4hLjx","CvOEFjqdGh2","mh8BLhdNzdZ","UQk2hdsxir2","RneKH4t8Hzy","tDjLfAvYqYS","b33NtMTTcC4","EFDEUHkxzKB","TkEY0zNqaYo","snbVXDbpUF0","LJb2HSFIQuU","znYbpnCa6t3","lUS0kJXARKL","IZnj0MXr30T","Xqj87ejoK2r","nWMbhxjbknm","joELlaMQo7j","QFkkTIHbWrD","hDfkoAaboVw","VjmbzaSKx0q","MHuhCGyz7P3"];
+    $paediatric_art=["ZZQLLja9m8c","LIYpaaiCoS6","VzegwuXxtNN","ykZAwAFkUEA","BffFPleu7MH","ogRuIwsR0lr","mYkiONvI23L","EZV0Q1fyQFj","oU9OZgMjond","ph0PryLXeCS","r3Kf6sPuDHn","lEzr1gedQGu","r0E8J8KIGZ6","rZLbSmsQqHv","BIwgCP7wtx4","wsCnhc5syHj","YPh9BcoHBg2","WHObTtNPTz4","xXCeXxqiI2P","hD80zz7ynKz","f8KSdSdme6E","jjcgIypy9FA","xRt6IRXbivG","uWbJ9XXlLjh","I06quRMoeEQ"];
+    $pmtct_women=["g5QgaRkiKg8","FDPpGRWpkV3","qAj0qKswbHS","U0DL2lUqfaC","LlavjZZJjBW","AoiKY3ozod7","zR8b86x7l6B","geIZzm3VO7q","db4Qxqi0s5U","jNzJ7qvRuzR","Crxn59lWzbm","og5mj1LeGr0","SjEjsaipkXU","HLsMEHL1IGJ","G7DrnEsuRj9","S7uMA5RTk07","w8ERj0ZHO7A"];
+    $pep_adults=["aHIBeT6B2Ur","rG8hRyaNhs5","lxMlZNqu9sr","vhJCIrppEXK","u72zpZXXK0u"];
+    $pep_children=["pH3vWHFUsw1","WtPR96wMbPP","VKXBk9e5xyx"];
+    $universal_prophylaxis=["YhbOpqt259d","TYMEDvibXVr","KdHTK5xeYXx","OYM1kxmXrSa"];
+    $ipt=["NVoegMliKZ8","Y6jYqmO8xmN"];
+    $diflucan_donation=["Orw6vLQQlNI","bYf0JZfBkoU","YdaFnP7rjcf","kz7vSNfh6xL","fiZfUd3ognF","NOUjq4bav6e"];
 
-    $grand_adult_art=0;
-    $grand_adult_pep=0;
-    $grand_adult_pmtct=0;
-    $grand_paediatric_art=0;
-    $grand_paediatric_pmtct=0;
-    $grand_paediatric_pep=0;
+        $sum_adult_art=0;
+        $sum_paediatric_art=0;
+        $sum_pep_adults=0;
+        $sum_diflucan_donation=0;
+        $sum_pmtct_women=0;
+        $sum_ipt=0;
+        $sum_pep_children=0;
+        $sum_universal_prophylaxis=0;
 
-    foreach($orgUnits as $orgUnit){
+       foreach($orgUnits as $orgUnit){
 
         $sum_adult_art=0;
         $sum_adult_pep=0;
@@ -129,8 +134,7 @@ else
 
         array_push($report,$data);
     }
-
-    $grand_data=array(
+$grand_data=array(
         'orgUnit'=>'grand_total',
         'data'=>array(
             'adult_art'=>$grand_adult_art,
@@ -143,9 +147,6 @@ else
 
     array_push($report,$grand_data);
     echo json_encode($report);
-
-
-
 }
 
 ?>

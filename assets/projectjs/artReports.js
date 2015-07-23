@@ -225,7 +225,7 @@ function getARTAnalytics()
 
 	                else if(selectedReportID == "Patients By Regimen")
 	                {
-	                    // Patients By Regimen
+	                  generateReportPatientsByRegimen(periodOfTheReport,selectedOrgUnitID);
 	                }
 
 	                else if(selectedReportID == "Stock Status")
@@ -252,10 +252,10 @@ function generateReportPatientsByOrderingPoints(period,orgUnitID, orgUnitLevel){
     //orgUnits for the Selected Level
     var orgUnits=[];
         //["AwVQ3uJftlj","DMF5wWYxVHg"];
-    var dataSet="VOzBhzjvVcw";
+    var dataSet="VoCwF0LPGjb";//"VOzBhzjvVcw";
     var mflCode="";
     var facilityName="";
-    var programId=1;
+    var programId=3;
 
     var url_facility_fmaps="api/get_facility_fmaps_report.php";
     var templateUrl="client/report_templates/art_report.php";
@@ -290,6 +290,22 @@ function generateReportPatientsByOrderingPoints(period,orgUnitID, orgUnitLevel){
                         else{
 
                             $("#loading").append('<img src="assets/img/ajax-loader-2.gif">');
+
+                            setTimeout(function(){
+                                $('#loading').html("Try Loading Again");
+                            }, 60000);
+
+                            setTimeout(function(){
+                                $('#loading').html("");
+                            }, 70000);
+
+                            //$('#artReport').dataTable({
+                            //    "paging":   false,
+                            //    "ordering": true,
+                            //    "info":     false,
+                            //    "searching":false
+                            //});
+
                             $.getJSON(url_facility_fmaps,
                                 {dataSet:dataSet,period:period,orgUnits:orgUnits},
                                 function(response){
@@ -299,21 +315,36 @@ function generateReportPatientsByOrderingPoints(period,orgUnitID, orgUnitLevel){
 
                                     $.each(response,function(index, obj){
 
-                                        var facility=$.grep(facilities, function(e){ return e.facility_id==obj.orgUnit;});
-                                        mflCode=facility[0].mfl_code;
-                                        facilityName=facility[0].facility_name;
+                                        if(obj.orgUnit=="grand_total"){
+                                            $("#grandTotal").append("<tr>" +
+                                            //"<td></td>"+
+                                            //"<td></td>"+
+                                            "<td colspan='3'>Grand Total</td>"+
+                                            "<td>"+obj.data.adult_art+"</td>"+
+                                            "<td>"+obj.data.adult_pep+"</td>"+
+                                            "<td>"+obj.data.adult_pmtct+"</td>"+
+                                            "<td>"+obj.data.paediatric_art+"</td>"+
+                                            "<td>"+obj.data.paediatric_pep+"</td>"+
+                                            "<td>"+obj.data.paediatric_pmtct+"</td>"+
+                                            "<tr>");
+                                        }
+                                        else{
+                                            var facility=$.grep(facilities, function(e){ return e.facility_id==obj.orgUnit;});
+                                            mflCode=facility[0].mfl_code;
+                                            facilityName=facility[0].facility_name;
 
-                                        $("#formData").append("<tr>" +
-                                        "<td>"+(index+1)+"</td>"+
-                                        "<td>"+mflCode+"</td>"+
-                                        "<td>"+facilityName+"</td>"+
-                                        "<td>"+obj.data.adult_art+"</td>"+
-                                        "<td>"+obj.data.pep_adults+"</td>"+
-                                        "<td>"+obj.data.pmtct_women+"</td>"+
-                                        "<td>"+obj.data.paediatric_art+"</td>"+
-                                        "<td>"+obj.data.pep_children+"</td>"+
-                                        "<td>"+obj.data.ipt+"</td>"+
-                                        "<tr>");
+                                           $('#formData').append("<tr>" +
+                                            "<td>"+(index+1)+"</td>"+
+                                            "<td>"+mflCode+"</td>"+
+                                            "<td>"+facilityName+"</td>"+
+                                            "<td>"+obj.data.adult_art+"</td>"+
+                                            "<td>"+obj.data.adult_pep+"</td>"+
+                                            "<td>"+obj.data.adult_pmtct+"</td>"+
+                                            "<td>"+obj.data.paediatric_art+"</td>"+
+                                            "<td>"+obj.data.paediatric_pep+"</td>"+
+                                            "<td>"+obj.data.paediatric_pmtct+"</td>"+
+                                            "<tr>");
+                                        }
                                     });
                                 });
                         }
@@ -322,11 +353,50 @@ function generateReportPatientsByOrderingPoints(period,orgUnitID, orgUnitLevel){
 
             });
     });
+}
+// function to generate report by Regimen
+function generateReportPatientsByRegimen(period,orgUnitID){
+
+    // alert(period+""+orgUnitID+);
+    //orgUnits for the Selected Level
+    var dataSet="VOzBhzjvVcw";
+    var  id="Js2jIKhWf6P";
+    var url_regimen_report="api/valuesets.php";
+    var templateUrl="client/report_templates/patients_regimen_report.php";
+
+    var urlDataSetTemplate="api/get_dataset_template.php";
+    $.get(templateUrl).then
+    (function(responseData) {
+        $('div#facilities').empty();
+        $('div#facilities').append(responseData);
+        $('#formName').append("Summary report patients by Regimen");
+        $('#period').append(generateYearName(period));
+                    $("#loading").append('<img src="assets/img/ajax-loader-2.gif">');
+                    $.getJSON(url_regimen_report,
+                        {dataSet:dataSet,period:period,orgUnit:id},
+                        function(obj){
+                            console.log(obj);
+                            // console.log(response);
+                            $("#loading").empty();
+                            $("#formData").empty();
+
+                                $("#formData").append("<tr>" +
+                                "<td>"+obj.data.adult_art+"</td>"+
+                                "<td>"+obj.data.pep_adults+"</td>"+
+                                "<td>"+obj.data.pmtct_women+"</td>"+
+                                "<td>"+obj.data.paediatric_art+"</td>"+
+                                "<td>"+obj.data.pep_children+"</td>"+
+                                "<td>"+obj.data.ipt+"</td>"+
+                                "<tr>");
+                            });
+                
+        });
+
+    
 
 
 
 }
-
 //Function for formatting the date
 function generateYearName(date){
     var str = date;
