@@ -21,7 +21,12 @@
 */
 function satelliteClassificationType()
 {
-    $('div#returned_messages').html("<span style = 'color:green;margin-left:30px'> SATELLITE SITES (Have Central Sites or Sub-County Stores as their parent)</span>");
+    $('div#returned_messages').html("<span style = 'color:green;margin-left:30px'>"+
+                                "<span id = 'maximize_icon' title = 'Full Screen' onclick = 'javascript:maximizeView();'>"+
+                                "<img src='assets/img/full-screen.png' class = 'unclickedColor' style = 'height:;width:;'>"+
+                                "</span>"+
+                                "&nbsp <span style = 'color:black'>|</span>"+ 
+                                "SATELLITE SITES (Have Central Sites or Sub-County Stores as their parent)</span>");
 
         var data =  // Select Program under which these satellite sites are classified
                     "<div style ='width:90%'>"+
@@ -47,7 +52,12 @@ function classifyFacilities(type, satelliteClassification)
     /* SUB-COUNTY STORES */
     if(type == 1)
     {
-        $('div#returned_messages').html("<span style = 'color:green;margin-left:30px'> SUB-COUNTY STORES<br><span id = 'note' style ='color:blue;font-weight:normal;font-size:10pt;margin-left:30px'>NOTE: Use DHIS2 Organization Units to sort and drill down</span></span>");
+        $('div#returned_messages').html("<span id = 'classification_desc' style = 'color:green;margin-left:30px'>"+
+                                "<span id = 'maximize_icon' title = 'Full Screen' onclick = 'javascript:maximizeView();'>"+
+                                "<img src='assets/img/full-screen.png' class = 'unclickedColor' style = 'height:;width:;'>"+
+                                "</span>"+
+                                "&nbsp <span style = 'color:black'>|</span>"+ 
+                                " SUB-COUNTY STORES</span>");
 
         var data = // Select Program under which these central sites are classified
                     "<div style ='width:90%'>"+
@@ -92,7 +102,7 @@ function classifyFacilities(type, satelliteClassification)
 
                         "<div class='panel-heading' style = 'height:5%;width:40%;margin-right:10px;margin-bottom:5px' onLoad='initIt();'>"+
                             // "<button class ='btn btn-info btn-sm' style = 'margin-left:px;width:20%' onclick='javascript:classifyFacilities(1)'>Reset</button>"+
-                            "<span style = 'margin-left:100px'>Available</span>"+
+                            "<span id = 'available_facilities' style = 'margin-left:100px'>Available</span>"+
                             "<span class = 'glyphicon glyphicon-forward pull-right unclickedColor' style = 'color:' ONCLICK='addIt(\"SelectList\",\"PickList\");'></span>"+
                             "<span class = 'glyphicon glyphicon-chevron-right pull-right unclickedColor' style = 'margin-right:10px;color:' ONCLICK='addIt(\"SelectList\",\"PickList\");'></span>"+
                         "</div>"+
@@ -133,7 +143,7 @@ function classifyFacilities(type, satelliteClassification)
         $.getJSON
         (
             url,
-            {id:"",type:1},
+            {id:"",type:"init"},
             function(received)
             {
                 for(var j=0; j<received.length;j++)
@@ -159,7 +169,12 @@ function classifyFacilities(type, satelliteClassification)
     /* CENTRAL STORES */
     else if(type == 2)
     {
-        $('div#returned_messages').html("<span style = 'color:green;margin-left:30px'> CENTRAL SITES<br><span id = 'note' style ='color:blue;font-weight:normal;font-size:10pt;margin-left:30px'>NOTE: Use DHIS2 Organization Units to sort and drill down</span></span>");
+        $('div#returned_messages').html("<span id = 'classification_desc' style = 'color:green;margin-left:30px'>"+
+                                "<span id = 'maximize_icon' title = 'Full Screen' onclick = 'javascript:maximizeView();'>"+
+                                "<img src='assets/img/full-screen.png' class = 'unclickedColor' style = 'height:;width:;'>"+
+                                "</span>"+
+                                "&nbsp <span style = 'color:black'>|</span>"+ 
+                                "CENTRAL SITES</span>");
 
         var data = // Select Program under which these central sites are classified
                     "<div style ='width:90%'>"+
@@ -204,7 +219,7 @@ function classifyFacilities(type, satelliteClassification)
 
                         "<div class='panel-heading' style = 'height:5%;width:40%;margin-right:10px;margin-bottom:5px' onLoad='initIt();'>"+
                             // "<button class ='btn btn-info btn-sm' style = 'margin-left:px;width:20%' onclick='javascript:classifyFacilities(1)'>Reset</button>"+
-                            "<span style = 'margin-left:100px'>Available</span>"+
+                            "<span id = 'available_facilities' style = 'margin-left:100px'>Available</span>"+
                             "<span class = 'glyphicon glyphicon-forward pull-right unclickedColor' style = 'color:' ONCLICK='addIt(\"SelectList\",\"PickList\");'></span>"+
                             "<span class = 'glyphicon glyphicon-chevron-right pull-right unclickedColor' style = 'margin-right:10px;color:' ONCLICK='addIt(\"SelectList\",\"PickList\");'></span>"+
                         "</div>"+
@@ -245,7 +260,7 @@ function classifyFacilities(type, satelliteClassification)
         $.getJSON
         (
             url,
-            {id:"",type:1},
+            {id:"",type:"init"},
             function(received)
             {
                 for(var j=0; j<received.length;j++)
@@ -276,13 +291,23 @@ function classifyFacilities(type, satelliteClassification)
         if(satelliteClassification == "central site satellites")
         {
             $('div#returned_messages').empty();
-            $('div#returned_messages').html("<span style = 'color:green;margin-left:30px'> CENTRAL SITE SATELLITES (Have Central Sites as their parent)<br><span id = 'note' style ='color:blue;font-weight:normal;font-size:10pt;margin-left:30px'>NOTE: Use DHIS2 Organization Units to sort and drill down</span></span>");
+            $('div#returned_messages').html("<span id = 'classification_desc' style = 'color:green;margin-left:30px'>"+
+                                "<span id = 'maximize_icon' title = 'Full Screen' onclick = 'javascript:maximizeView();'>"+
+                                "<img src='assets/img/full-screen.png' class = 'unclickedColor' style = 'height:;width:;'>"+
+                                "</span>"+
+                                "&nbsp <span style = 'color:black'>|</span>"+ 
+                                "CENTRAL SITE SATELLITES (Have Central Sites as their parent)</span>");
         }
 
         else if (satelliteClassification == "sub-county satellites")
         {
             $('div#returned_messages').empty();
-            $('div#returned_messages').html("<span style = 'color:green;margin-left:30px'> SUB-COUNTY STORE SATELLITES (Have Sub-County Stores as their parent)<br><span id = 'note' style ='color:blue;font-weight:normal;font-size:10pt;margin-left:30px'>NOTE: Use DHIS2 Organization Units to sort and drill down</span></span>");
+            $('div#returned_messages').html("<span id = 'classification_desc' style = 'color:green;margin-left:30px'>"+
+                                "<span id = 'maximize_icon' title = 'Full Screen' onclick = 'javascript:maximizeView();'>"+
+                                "<img src='assets/img/full-screen.png' class = 'unclickedColor' style = 'height:;width:;'>"+
+                                "</span>"+
+                                "&nbsp <span style = 'color:black'>|</span>"+ 
+                                "SUB-COUNTY STORE SATELLITES (Have Sub-County Stores as their parent)</span>");
         }
 
         var data =  // Select Program under which these satellite sites are classified
@@ -361,7 +386,7 @@ function classifyFacilities(type, satelliteClassification)
                         "</span>"+
                         "<div class='panel-heading' style = 'height:6%;width:40%;margin-right:10px;margin-bottom:5px' onLoad='initIt();'>"+
                             // "<button class ='btn btn-info btn-sm' style = 'margin-left:px;width:20%' onclick='javascript:classifyFacilities(2)'>Reset</button>"+
-                            "<span style = 'margin-left:100px'>Available</span>"+
+                            "<span id = 'available_facilities' style = 'margin-left:100px'>Available</span>"+
                             "<span class = 'glyphicon glyphicon-forward pull-right unclickedColor' style = 'color:;margin-top:3px' ONCLICK='addIt(\"SelectList\",\"PickList\");'></span>"+
                             "<span class = 'glyphicon glyphicon-chevron-right pull-right unclickedColor' style = 'margin-right:10px;color:;margin-top:3px' ONCLICK='addIt(\"SelectList\",\"PickList\");'></span>"+
                         "</div>"+
@@ -431,7 +456,7 @@ function classifyFacilities(type, satelliteClassification)
         $.getJSON
         (
             url,
-            {id:"",type:1},
+            {id:"",type:"init"},
             function(received)
             {
                 for(var j=0; j<received.length;j++)
@@ -459,7 +484,12 @@ function classifyFacilities(type, satelliteClassification)
     /*STAND ALONES*/
     else if(type == 4)
     {
-        $('div#returned_messages').html("<span style = 'color:green;margin-left:30px'> STANDALONE SITES<br><span id = 'note' style ='color:blue;font-weight:normal;font-size:10pt;margin-left:30px'>NOTE: Use DHIS2 Organization Units to sort and drill down</span></span>");
+        $('div#returned_messages').html("<span id = 'classification_desc' style = 'color:green;margin-left:30px'>"+
+                                "<span id = 'maximize_icon' title = 'Full Screen' onclick = 'javascript:maximizeView();'>"+
+                                "<img src='assets/img/full-screen.png' class = 'unclickedColor' style = 'height:;width:;'>"+
+                                "</span>"+
+                                "&nbsp <span style = 'color:black'>|</span>"+ 
+                                "STANDALONE SITES</span>");
 
         var data = // Select Program under which these stand alone sites are classified
                     "<div style = 'width:90%'>"+
@@ -503,7 +533,7 @@ function classifyFacilities(type, satelliteClassification)
                             "StandAlone Sites: Have the program above attributed to them"+
                         "</span>"+
                         "<div class='panel-heading' style = 'height:5%;width:40%;margin-right:10px;margin-bottom:5px' onLoad='initIt();'>"+
-                            "<span style = 'margin-left:100px'>Available</span>"+
+                            "<span id = 'available_facilities' style = 'margin-left:100px'>Available</span>"+
                             "<span class = 'glyphicon glyphicon-forward pull-right unclickedColor' style = 'color:' ONCLICK='addIt(\"SelectList\",\"PickList\");'></span>"+
                             "<span class = 'glyphicon glyphicon-chevron-right pull-right unclickedColor' style = 'margin-right:10px;color:' ONCLICK='addIt(\"SelectList\",\"PickList\");'></span>"+
                         "</div>"+
@@ -543,13 +573,13 @@ function classifyFacilities(type, satelliteClassification)
         $.getJSON
         (
             url,
-            {id:"",type:1},
+            {id:"",type:"init"},
             function(received)
             {
                 for(var j=0; j<received.length;j++)
                 {
-                    $('span#note').html("Loading <img src='assets/img/ajax-loader-3.gif'>");  
-                    $("<option id = 'options' VALUE='"+received[j].facility_id+"'>"+received[j].facility_name+"</option>").appendTo("select#SelectList");
+                    $('span#note').html("Loading <img src='assets/img/ajax-loader-3.gif'>");    
+                    $("<option VALUE='"+received[j].facility_id+"'>"+received[j].facility_name+"</option>").appendTo("select#SelectList");
                 }
                 $('span#note').html("NOTE: Use DHIS2 Organization Units to sort and drill down");   
             }
