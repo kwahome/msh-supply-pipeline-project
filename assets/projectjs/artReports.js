@@ -1,4 +1,7 @@
 /*function siteAnalytics()*/
+/*DO NOT ALTER*/
+
+/*ART*/
 function ARTAnalytics()
 {
     $('div#returned_messages').html("<span style = 'color:green;margin-left:30px'> NASCOP - ART ANALYTICS (Generate ART reports)</span>");
@@ -620,7 +623,6 @@ function generateYearName(date){
 
         return "December-"+year;
     }
-
 }
 
 
