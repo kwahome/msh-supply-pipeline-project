@@ -12,7 +12,7 @@
 * kevowahome@gmail.com                                                             *
 * ---------------------------------------------------------------------------------*
 **
-*This file contains JavaScript functions for the MSH Supply Chain Hierarchy project
+* This file contains JavaScript functions for the MSH Supply Chain Hierarchy project
 **
 * ---------------------------------------------------------------------------------*/
 
