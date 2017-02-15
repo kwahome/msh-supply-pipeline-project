@@ -1,3 +1,5 @@
+/*Common functions*/
+
 /* Function to change the icon in the collapsible menu*/
 function changeIcon(itemID,folderIcon)
 {
