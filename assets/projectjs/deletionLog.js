@@ -1,4 +1,4 @@
-// Function getDeletionLog()
+/*Function getDeletionLog()*/
 function getDeletionLog()
 {
 	$('div#returned_messages').html("<span style = 'color:green;margin-left:30px;'>"+
