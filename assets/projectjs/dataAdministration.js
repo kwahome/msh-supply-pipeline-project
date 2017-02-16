@@ -1,4 +1,4 @@
-// Function getSupplyHierarchy()
+/*Function getSupplyHierarchy()*/
 // This function displays all classification in the data administration area
 function getSupplyHierarchy()
 {
