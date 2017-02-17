@@ -1,4 +1,6 @@
 /*function hierarchyReport()*/
+
+/*Generates a report following the defined hierarchy*/
 function hierarchyReport()
 {
     $('div#returned_messages').html("<span style = 'color:green;margin-left:30px'>"+
