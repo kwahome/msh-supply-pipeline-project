@@ -1,9 +1,11 @@
-//PICKLIST
+/*
+* PICKLIST
 
-// PickList script
-// Control flags for list selection and sort sequence
-// Sequence is on option value (first 2 chars - can be stripped off in form processing)
-// It is assumed that the select list is in sort sequence initially
+* PickList script
+* Control flags for list selection and sort sequence
+* Sequence is on option value (first 2 chars - can be stripped off in form processing)
+* It is assumed that the select list is in sort sequence initially
+*/
 var singleSelect = true;  // Allows an item to be selected once only
 var sortSelect = true;  // Only effective if above flag set to true
 var sortPick = true;  // Will order the picklist in sort sequence
