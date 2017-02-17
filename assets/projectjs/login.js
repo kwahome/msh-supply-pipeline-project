@@ -12,8 +12,8 @@
 * kevowahome@gmail.com                                                             *
 * ---------------------------------------------------------------------------------*
 **
-*This file contains JavaScript functions for the MSH Supply Chain Hierarchy project
-*Login page
+* This file contains JavaScript functions for the MSH Supply Chain Hierarchy project
+* Login page
 **
 * ---------------------------------------------------------------------------------*/
 
