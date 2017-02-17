@@ -1,4 +1,4 @@
-/*Function*/
+/*Function to logout user*/
 $(document).ready(function(){
 	// function userSignout(logoutBtn)
 	// {
