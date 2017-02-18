@@ -1,5 +1,7 @@
-// Function validateEmail
-// Validates an email to ensure it follows the correct email syntax
+/*
+ Function validateEmail
+ Validates an email to ensure it follows the correct email syntax
+*/
 function validateEmail(email) 
 {
     var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
