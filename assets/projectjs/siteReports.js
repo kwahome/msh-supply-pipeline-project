@@ -1,6 +1,7 @@
+/*Date now*/
 var dateGenerated = new Date();
 
-// function siteAnalytics()
+/*function siteAnalytics()*/
 function siteAnalytics()
 {
 	$('div#returned_messages').html("<span style = 'color:green;margin-left:30px'> SITES ANALYTICS (Generate ordering points or service points analysis)</span>");
