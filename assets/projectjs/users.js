@@ -1,4 +1,4 @@
-// Function createUsers()
+/*Function createUsers()*/
 function createUsers(load,createdUserID,createdUserName)
 {
     if(load == "details")
