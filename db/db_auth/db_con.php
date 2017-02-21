@@ -1,6 +1,6 @@
 <?php
     
-    # System config script include
+    # System config script included
     require '../../system/config.php';
 
     # Database connection parameters
