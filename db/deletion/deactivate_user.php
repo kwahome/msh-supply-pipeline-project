@@ -3,6 +3,7 @@
     require '../../system/config.php';
 
     session_start();
+    
     // Validate a user has logged in
     // If not logged in, redirect to the log in page
     if(!isset($_SESSION['login_id']))
