@@ -6,10 +6,10 @@
 
     # Database connection parameters
     # Edit accordingly
-    $server = "localhost";
-    $user = "root";
-    $password = "wahome";
-    $database = "msh_task";
+    $server = "YOURDOMAIN";
+    $user = "YOURUSER";
+    $password = "YOURUSERPASSWORD";
+    $database = "YOURDATABASENAME";
 
     # DHIS2 Deployed URL
     # Instance of DHIS2 in use
@@ -25,5 +25,5 @@
     # The link to the documentation of the project
     # Edit accordingly
     $documentation_url = "http://dhis2-supply-chain-documentation.readthedocs.org/en/latest/index.html";
-    $user_guide = "http://dhis2-supply-chain-documentation.readthedocs.org/en/latest/Userguide.html";
+    $user_guide = "http://supply-chain-hierarchy-project.readthedocs.org/en/latest/";
 ?>
